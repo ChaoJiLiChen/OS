@@ -135,3 +135,57 @@ rpm -qa --pipe "grep ssh" 等同
   ```
     rpm –q --changelog package_name
   ```
+
+- rpm 查找最近安装的包 排序
+  ```
+  rpm -qa --last | head
+  ```
+
+- rpm 查询不在本地包的信息
+  ```
+  rpm -qp ftp://username:password@hostname:port/path/to/rpm/file
+  ```
+
+- rpm 验证
+  ```
+  rpm -V verify_options package_name
+  ```
+
+- rpm 重建数据库
+  ```
+  rpm 数据存放在  /var/lib/rpm
+  rpm --rebuilddb
+  ```
+
+- rpm 新建数据库
+  ```
+  rpm --initdb 如果已经出现了需要新建rpm数据库的情况 还不如直接重新安装操作系统
+  ```
+
+- rpm 查看包是否满足安装的条件
+  ```
+  rpm -qp --requires sendmail-8.12.5-7.i386.rpm
+  ```
+
+- rpm 提供的功能
+  ```
+   rpm -q --provides tcsh
+  ```
+
+- rpm 检查是否存在冲突
+  ```
+   rpm -q --conflicts httpd
+  ```
+
+- rpm 软件包被那些包依赖
+  ```
+  rpm -q --whatrequires tcsh
+  ```
+
+- rpm 查询哪个包提供了 webserver 的功能
+  ```
+  rpm -q --whatprovides webserver
+  ```
+
+
+At page 101
