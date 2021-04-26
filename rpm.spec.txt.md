@@ -125,7 +125,7 @@ rpm -qa --pipe "grep ssh" 等同
   ```
   rpm –qs package_name
   ```
-
+A
 - rpm 列出安装脚本
   ```
   rpm -q --scripts package_name
@@ -187,5 +187,4 @@ rpm -qa --pipe "grep ssh" 等同
   rpm -q --whatprovides webserver
   ```
 
-
-At page 101
+- 
