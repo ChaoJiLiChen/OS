@@ -186,5 +186,28 @@ A
   ```
   rpm -q --whatprovides webserver
   ```
+- rpm rpmfind
+  ```
+  rpmfind package_name
+  //todo
+  ```
 
-- 
+  - rpm rpmfind
+  ```
+  //todo
+  ```
+
+  - rpm rpm包网址
+  ```
+  rpmfind.net
+  freshrpms.net
+  http://rpm.pbone.net/ provides
+  http://plf.zarb.org/
+  www.math.unl.edu/~rdieter/Projects/
+  www.rpmhelp.net/
+  www.aucs.org/rpmcenter/
+  www.owlriver.com/projects/links/
+  ```
+
+
+page 104
