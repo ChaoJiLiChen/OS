@@ -209,5 +209,49 @@ A
   www.owlriver.com/projects/links/
   ```
 
+- rpm AutoRPM
+  ```
+  //todo
+  ```
 
-page 104
+
+valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
+
+- rpmbuild 目录结构
+  ```
+  SPECS	        %_specdir	Spec 文件目录	        保存 RPM 包配置、规范（.spec）文件
+  SOURCES	        %_sourcedir	源代码目录	        源代码
+  BUILD  	        %_builddir	构建目录	                源码包被解压至此，并在该目录的子目录完成编译
+  BUILDROOT	%_buildrootdir	最终安装目录	        保存 %install 阶段安装的文件
+  RPMS	        %_rpmdir	标准 RPM 包目录	        生成/保存二进制 RPM 包
+  SRPMS	        %_srcrpmdir	源代码 RPM 包目录	生成/保存源码 RPM 包(SRPM)
+  ```
+
+- rpmbuild 构建命令 (一般只会使用 -ba 命令)
+  ```
+  rpmbuild -bBuildStage spec_file
+  -ba          Build all, both a binary and source RPM
+  -bb          Build a binary RPM
+  -bc          Build (compile) the program but do not make the full RPM, stopping just after the %build section
+  -bp          Prepare for building a binary RPM, and stop just after the %prep section
+  -bi          Create a binary RPM and stop just after the %install section
+  -bl          Check the listing of files for the RPM and generate errors if the buildroot is missing any of the files to be installed
+  -bs          Build a source RPM only
+  ```
+
+- rpmbuild 使用rpmbuild 操作时 不要使用root用户 使用普通用户就可以
+
+- rpmbuild clean
+  ```
+  rpmbuild --clean specfile
+  ```
+
+- rpmbuild 验证  
+  ```  
+  rpmbuild –bl spec_file
+  ```
+
+- rpmbuild 初始化目录
+  ```
+  rpmdev-setuptree
+  ```
