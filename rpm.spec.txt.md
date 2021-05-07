@@ -255,3 +255,81 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
   ```
   rpmdev-setuptree
   ```
+
+
+- rpmbuild clean
+  ```
+  $ rpmbuild --clean /usr/src/redhat/SPECS/jikes.spec  清理树 
+  ```
+
+- rpmbuild 架构
+  ```
+  rpmbuild -bi --target i486-redhat-linux    cpu-vendor-os （cpu 供应商 操作系统）
+  ```
+
+- rpmbuild 直接通过tar包构建
+  ```
+  rpmbuild -tBuildStage compressed_tar_archive  (rpmbuild -ta kernel-4.19.5.tar.gz ) 
+  ```
+- rpmbuild 用源码rpm包重新构建  --rebuild
+  ```
+  rpmbuild --rebuild unix2dos-2.2-17.src.rpm
+  ```
+
+- rpm 同时安装多个包
+  ```
+  rpm -ihv package1.rpm package2.rpm package3.rpm  如果有一个安装失败 那么全部都不会安装
+  ```
+
+- rpm 回滚
+  ```
+  rpm –U --rollback "3 months ago" 
+  ```
+
+- rpm 查找包
+  ```
+  rpmfind package_name
+  ```
+
+- rpm 模糊查询
+  ```
+   rpmfind --apropos "mail client"
+  ```
+
+- rpm rpm包查找网站
+  ```
+   rpmfind.net
+   freshrpms.net
+   http://rpm.pbone.net/
+   http://plf.zarb.org/
+   www.math.unl.edu/~rdieter/Projects/
+   www.rpmhelp.net/
+   www.aucs.org/rpmcenter/
+   www.owlriver.com/projects/links/
+  ```
+
+- rpmbuild clean
+  ```
+  $ rpmbuild --clean /usr/src/redhat/SPECS/jikes.spec  清理树 
+  ```
+
+- rpmbuild 架构
+  ```
+  rpmbuild -bi --target i486-redhat-linux    cpu-vendor-os （cpu 供应商 操作系统）
+  ```
+
+- rpmbuild 直接通过tar包构建
+  ```
+  rpmbuild -tBuildStage compressed_tar_archive  (rpmbuild -ta kernel-4.19.5.tar.gz ) 
+  ```
+- rpmbuild 用源码rpm包重新构建  --rebuild
+  ```
+  rpmbuild --rebuild unix2dos-2.2-17.src.rpm
+  ```
+
+
+
+
+cap 12
+
+ls -la /usr/lib64/liblfs*
