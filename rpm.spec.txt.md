@@ -327,9 +327,50 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
   rpmbuild --rebuild unix2dos-2.2-17.src.rpm
   ```
 
+- 解决rpm依赖问题
+  ```
+  yum-builddep 
+  ```
 
 
+- rpmbuild 需要工具
+  ```
+  yum install gcc rpm-build rpm-devel rpmlint make python bash coreutils diffutils patch rpmdevtools
+  ```
 
-cap 12
+- 一个简单的spec 文件
+  ```
+  Name: hello-world 
+  Version: 1 
+  Release: 1 
+  Summary: Most simple RPM package 
+  License: FIXME 
+  %description This is my first RPM package, which does nothing. 
+  %prep # we have no source, so nothing here %build cat > hello-world.sh <<EOF 
+  #!/usr/bin/bash 
+  echo Hello world 
+  EOF 
+  %install 
+  mkdir -p %{buildroot}/usr/bin/ 
+  install -m 755 hello-world.sh %{buildroot}/usr/bin/hello-world.sh 
+  %files 
+  /usr/bin/hello-world.sh 
+  %changelog 
+  # let skip this for now
+  ```
+
+- 运行 rpmdev-setuptree 在当前用户的家目录下生成 rpmbuild 目录
+- 运行 rpmbuild -ba hello-world.spec 生成自己的第一个包
+
+- 生成patch文件 diff -Naur cello.c.orig cello.c > cello-output-first-patch.patch
+
+- 源码用补丁修改  patch < cello-output-first-patch.patch
+
+- 安装程序  sudo install -m 0755 bello /usr/bin/bello （-m 自定义模式）
+ 
+
+make rpm-pkg
+
+cap 15
 
 ls -la /usr/lib64/liblfs*
