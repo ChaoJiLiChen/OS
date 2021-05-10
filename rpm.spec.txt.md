@@ -217,16 +217,6 @@ A
 
 valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
 
-- rpmbuild 目录结构
-  ```
-  SPECS	        %_specdir	Spec 文件目录	        保存 RPM 包配置、规范（.spec）文件
-  SOURCES	        %_sourcedir	源代码目录	        源代码
-  BUILD  	        %_builddir	构建目录	                源码包被解压至此，并在该目录的子目录完成编译
-  BUILDROOT	%_buildrootdir	最终安装目录	        保存 %install 阶段安装的文件
-  RPMS	        %_rpmdir	标准 RPM 包目录	        生成/保存二进制 RPM 包
-  SRPMS	        %_srcrpmdir	源代码 RPM 包目录	生成/保存源码 RPM 包(SRPM)
-  ```
-
 - rpmbuild 构建命令 (一般只会使用 -ba 命令)
   ```
   rpmbuild -bBuildStage spec_file
@@ -360,6 +350,7 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
   ```
 
 - 运行 rpmdev-setuptree 在当前用户的家目录下生成 rpmbuild 目录
+  
 - 运行 rpmbuild -ba hello-world.spec 生成自己的第一个包
 
 - 生成patch文件 diff -Naur cello.c.orig cello.c > cello-output-first-patch.patch
@@ -367,10 +358,99 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
 - 源码用补丁修改  patch < cello-output-first-patch.patch
 
 - 安装程序  sudo install -m 0755 bello /usr/bin/bello （-m 自定义模式）
- 
 
+
+- rpmbuild 目录结构
+  ```
+  SPECS	        %_specdir	Spec 文件目录	        保存 RPM 包配置、规范（.spec）文件
+  SOURCES	        %_sourcedir	源代码目录	        源代码/补丁文件
+  BUILD  	        %_builddir	构建目录	                源码包被解压至此，并在该目录的子目录完成编译
+  BUILDROOT	%_buildrootdir	最终安装目录	        保存 %install 阶段安装的文件
+  RPMS	        %_rpmdir	标准 RPM 包目录	        生成/保存二进制 RPM 包
+  SRPMS	        %_srcrpmdir	源代码 RPM 包目录	生成/保存源码 RPM 包(SRPM)
+  ```
+
+- NVR 原则
+  ```
+  rpm 包命名遵循NVR原则 NAME-VERSION-RELEASE python-2.7.5-34.el7.x86_64
+  ```
+
+- spec 文件详细参数
+  |参数|描述|
+  |----|----|
+  |Name|程序包的名称 与spce文件名应一直
+  |Version|软件版本|
+  |Release|此版本的软件发布测试|
+  |Summary|简要说明|
+  |License|软件许可证|
+  |URL|更多信息完整的URL|
+  |Source0|源代码压缩存档的路径 序号可以累加 Source1 Source2|
+  |Patch0|补丁名称 可以累加 Patch1 Patch2|
+  |BuildArch|系统架构|
+  |BuildRequires|安装所需要的依赖包|
+  |Requires|运行需要依赖包|
+  |ExcludeArch|排除某个系统架构|
+  |%description|软件包的完整描述 可以分段落 跨越多行|
+  |%prep|如何构建环境 可以包含shell脚本
+  |%build|实际构建软件包的命令|
+  |%install|从%builddir（生成的位置）复制到%buildroot目录|
+  |%check|软件包的测试命令|
+  |%files|将安装在最终用户系统中的文件的列表。|
+  |%changelog|不同版本或发行版本之间对包发生的更改记录。|
+
+- rpmdev-newspec 创建spec文件
+
+- rpmbuild -bs SPECFILE 构建SRPM
+
+- 构建 PRM rpmbuild --rebuild 通过src.rpm
+
+- 安装 rpm -Uvh 
+
+- Building Binary from the SPEC file
+  ```
+  rpmbuild -bb ~/rpmbuild/SPECS/bello.spec
+  ```
+- rpm 检查
+  ```
+  rpmlint 
+  ```
+
+- 添加签名
+  ```
+  rpm --addsign
+  ```
+
+- 检查签名
+  ```
+  rpm --addsign blather-7.9-1.i386.rpm 
+  ```
+
+
+- rpm 条件判断
+  ```
+  %if expression 
+  ... 
+  %else 
+  ... 
+  %endif
+  ```
+
+- 判断系统架构
+  ```
+  %ifarch i386 sparc 
+  ... 
+  %endif
+  ```
+
+- 判断操作系统
+  ```
+  %ifos linux 
+  ... 
+  %endif
+  ```
 make rpm-pkg
 
 cap 15
 
 ls -la /usr/lib64/liblfs*
+
