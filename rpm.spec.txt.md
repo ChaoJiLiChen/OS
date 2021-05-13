@@ -1,3 +1,4 @@
+```
 Name:      hello-world
 Version:   1
 Release:   1
@@ -25,32 +26,32 @@ install -m 755 hello-world.sh %{buildroot}/usr/bin/hello-world.sh
 
 %changelog
 # let skip this for now
+```
+
+- rpm --eval %{?dist}
 
 
-rpm --eval %{?dist}
-
-
-rpmdev-newspec bello
+- rpmdev-newspec bello
 
 
 
-rpm --showrc
+- rpm --showrc
 
 
-宏文件路径：/usr/lib/rpm/macros.d/
+- 宏文件路径：/usr/lib/rpm/macros.d/
 
 
-systemctl disable firewalld
+- systemctl disable firewalld
 
-systemctl enable vncserver@:1
-
-
-valgrind --tool=memcheck --leak-check=full ./t6
-
-ls -la /usr/lib64/liblfs*
+- systemctl enable vncserver@:1
 
 
-rpm2cpio mlocate-0.22.2-2.i686.rpm | cpio –ivd usr/share/doc/mlocate-0.22.2/README 提取文件
+- valgrind --tool=memcheck --leak-check=full ./t6
+
+- ls -la /usr/lib64/liblfs*
+
+
+- rpm2cpio mlocate-0.22.2-2.i686.rpm | cpio –ivd usr/share/doc/mlocate-0.22.2/README 提取文件
 
 rpm -h 显示进度
 rpm -v 显示详细信息
@@ -328,15 +329,19 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
   yum install gcc rpm-build rpm-devel rpmlint make python bash coreutils diffutils patch rpmdevtools
   ```
 
-- 一个简单的spec 文件
+- 一个简单的spec 文件         
   ```
   Name: hello-world 
   Version: 1 
   Release: 1 
   Summary: Most simple RPM package 
   License: FIXME 
-  %description This is my first RPM package, which does nothing. 
-  %prep # we have no source, so nothing here %build cat > hello-world.sh <<EOF 
+  %description 
+  This is my first RPM package, which does nothing. 
+  %prep 
+  # we have no source, so nothing here 
+  %build 
+  cat > hello-world.sh <<EOF 
   #!/usr/bin/bash 
   echo Hello world 
   EOF 
@@ -378,7 +383,7 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
 - spec 文件详细参数
   |参数|描述|
   |----|----|
-  |Name|程序包的名称 与spce文件名应一直
+  |Name|程序包的名称 与spec文件名应一直
   |Version|软件版本|
   |Release|此版本的软件发布测试|
   |Summary|简要说明|
@@ -450,7 +455,25 @@ valgrind --tool=memcheck --leak-check=full --log-file=log.txt ./TESTMANAGER
   ```
 make rpm-pkg
 
-cap 15
+
+- 编译tuna源的包
+  ```
+  mockchain --continue -r /etc/mock/ax7sp9-x86_64.cfg ./*
+  修改 /etc/yum.d/**** 文件 添加 清华的源包 
+
+  /etc/mock/ax7sp9-x86_64.cfg 放过去
+
+  添加mockchair 
+
+  添加 asianux-release 包 添加本地 包 createrepo
+
+  reposync -r redflag-tuna --source 下载包
+  ```
 
 ls -la /usr/lib64/liblfs*
+
+
+
+
+- objdump -d HelloWorld 汇编查看可运行程序汇编代码
 
